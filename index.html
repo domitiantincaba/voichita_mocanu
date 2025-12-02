@@ -5,120 +5,176 @@
 <title>Vivi – Legenda Vie din Brăila</title>
 
 <style>
+
+/* ===== BACKGROUND ANIMAT ===== */
 body{
     margin:0;
-    background:linear-gradient(160deg,#050505,#1a001a);
-    color:#f2f2f2;
-    font-family: Arial, sans-serif;
-    text-align:center;
+    background:linear-gradient(270deg,#050505,#250025,#050505);
+    background-size:600% 600%;
+    animation:bgMove 15s ease infinite;
+    color:white;
+    font-family:Arial, sans-serif;
 }
 
+@keyframes bgMove{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+/* ===== LAYOUT ===== */
 .container{
     max-width:900px;
     margin:auto;
-    padding:40px 20px;
+    padding:35px 20px;
+    text-align:center;
+}
+
+/* ===== COPERTA ===== */
+.cover img{
+    width:100%;
+    max-width:400px;
+    border-radius:20px;
+    box-shadow:0 0 30px rgba(255,0,180,0.5);
+    transition:transform .3s ease;
+}
+
+.cover img:hover{
+    transform:scale(1.03);
 }
 
 h1{
+    margin-top:25px;
     color:#ff3cac;
     font-size:42px;
-    margin-bottom:10px;
 }
 
 h2{
-    color:#fbd3ff;
+    margin-top:5px;
     font-weight:normal;
-    margin-bottom:30px;
+    color:#ffd4ff;
 }
 
-.card{
-    background:rgba(255,255,255,0.06);
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 0 15px rgba(255,60,172,0.2);
-    margin-bottom:40px;
+/* ===== PLAYER ===== */
+.player{
+    margin:35px auto;
+    padding:20px;
+    max-width:420px;
+    border-radius:20px;
+    background:rgba(255,255,255,.05);
+    box-shadow:0 0 25px rgba(255,60,172,0.6);
+    animation:glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow{
+    from{box-shadow:0 0 12px rgba(255,60,172,.3);}
+    to{box-shadow:0 0 35px rgba(255,60,172,.9);}
 }
 
 audio{
     width:100%;
-    max-width:400px;
-    margin-top:15px;
 }
 
-.lyrics{
+/* ===== LYRICS ===== */
+
+.lyricsBox{
+    background:rgba(255,255,255,0.06);
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 0 15px rgba(255,60,172,.2);
     text-align:left;
-    white-space:pre-line;
     line-height:1.6;
+    max-height:350px;
+    overflow-y:auto;
+    white-space:pre-line;
+}
+
+/* scrollbar custom */
+.lyricsBox::-webkit-scrollbar{
+    width:8px;
+}
+.lyricsBox::-webkit-scrollbar-thumb{
+    background:#ff3cac;
+    border-radius:10px;
 }
 
 .footer{
-    margin-top:50px;
+    margin-top:40px;
     opacity:0.6;
+    text-align:center;
 }
+
 </style>
 </head>
 
-
 <body>
+
 <div class="container">
+
+<!-- ===== COPERTA ===== -->
+<div class="cover">
+    <img src="coperta-vivi.jpg" alt="Vivi – Legenda Vie">
+</div>
 
 <h1>🎸 Voichița – Vivi</h1>
 <h2>Legenda Vie a Asistenței Sociale din Brăila</h2>
 
-<div class="card">
-<h3>🎵 Melodie dedicată</h3>
-
-<audio controls>
-    <source src="vivi-legenda-vie.mp3" type="audio/mpeg">
-    Browserul tău nu suportă audio.
-</audio>
-
-<p>O piesă special creată pentru o legendă adevărată.</p>
+<!-- ===== PLAYER ===== -->
+<div class="player">
+    <audio controls>
+        <source src="vivi-legenda-vie.mp3" type="audio/mpeg">
+        Browserul tău nu suportă audio.
+    </audio>
 </div>
 
+<!-- ===== LYRICS ===== -->
+<div class="lyricsBox">
 
-<div class="card lyrics">
-<b>Portretul lui Vivi</b>
+<b>Vivi – Legenda Vie</b>
 
-Vivi apare exact atunci când ai nevoie de ajutor,
-directă ca un raport fără introducere
-și sinceră cât o ședință fără cafea.
+În birourile din Brăila, printre dosare-n foc,
+Unde imprimantele plâng, ca trenurile fără loc,
+Apare-o siluetă, fix când ai nevoie,
+Voichița – Vivi – salvare pentru noi toți la datorie.
 
-Călătorește prin vise și hotare,
-gustă lumea-n pași mici,
-cu Florin la delegație gastronomică.
+Directă ca un raport, fără nicio introducere,
+Spune adevărul tare, n-are timp de traducere,
+Călătorește prin vise, prin hărți și prin hotare,
+Dar gustă lumea-n pași mici, cu Florin la testare.
 
 „Varză sau conopidă?
-În interes de serviciu!”
-— Pachetul dispare eroic.
+— În interes de serviciu!”
+Pachetul dispare,
+De Vivi n-ai scăpare.
 
-Sună de 20 de ori pe zi
-și se miră de fiecare dată:
-„Nu pot vorbi, sunt ocupată”.
+Vivi, Vivi, legenda vie,
+Din Brăila până-n galaxie,
+Cu telefonul mereu deschis,
+Și sufletul la maxim aprins.
 
-Organizează nunti ca un general,
-comandă pantofi săptămânal,
-iar curierii o salută pe nume mic.
+Sună fiica de douăzeci de ori pe zi,
+„Nu pot vorbi, sunt ocupată” – mereu va auzi,
+Surpriza rămâne constantă,
+Dar perseverența – diamantă.
 
-Cu Cornel se ceartă ca-n ring,
-dar fără ei biroul n-ar avea swing.
+Organizează nunta ca generalul în război,
+Curierii o știu după pantofii noi,
+Cu Cornel se ceartă-n ring modern,
+Dar fără ei doi, biroul ar fi tern.
 
-E severă uneori,
-dar inimii ei mari nu-i pune nimeni carton —
-bunicuțele sunt mereu primele pe listă.
-
-În jungla birocratică din Brăila,
-Voichița nu e doar inspector superior:
-este legenda care ajută atunci când contează.
+Strictă uneori, dar cu suflet imens,
+Bunicuțele sunt mereu pe sens,
+În jungla birocratică grea,
+Vivi rămâne speranța, inima cea rea… de bună.
+  
 </div>
 
-
 <div class="footer">
-💜 Creat pentru Vivi — Legenda Vie <br>
+💜 Omagiu dedicat lui Vivi — Legenda Vie <br>
 Brăila • 2025
 </div>
 
 </div>
-</body>
 
+</body>
 </html>
