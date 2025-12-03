@@ -46,7 +46,7 @@ body{
 /* ===== CONTAINER ===== */
 .container{
     width:90%;
-    max-width:500px;
+    max-width:520px;
     text-align:center;
     z-index:2;
 }
@@ -63,7 +63,6 @@ h2{
 }
 
 /* ===== PLAYER ===== */
-
 .player{
     margin-top:20px;
     padding:25px;
@@ -71,6 +70,12 @@ h2{
     background:rgba(255,255,255,.05);
     box-shadow:0 0 25px rgba(255,60,172,0.6);
     animation:glow 3s ease-in-out infinite alternate;
+
+    transition:.5s ease;
+}
+
+.player.zoom{
+    transform:scale(1.12);
 }
 
 @keyframes glow{
@@ -82,30 +87,30 @@ audio{
     width:100%;
 }
 
-/* ===== BUTON PLAY ===== */
-
-.playBtn{
-    margin:15px auto;
+/* ===== BUTOANE ===== */
+.playBtn,
+.descBtn{
+    margin:12px auto 0;
     padding:12px 30px;
     border:none;
     border-radius:30px;
     background:#ff3cac;
     color:black;
-    font-size:18px;
+    font-size:17px;
     font-weight:bold;
     cursor:pointer;
     box-shadow:0 0 12px #ff3cac;
     transition:.3s;
 }
 
-.playBtn:hover{
+.playBtn:hover,
+.descBtn:hover{
     background:white;
 }
 
 /* ===== EQUALIZER ===== */
-
 .bars{
-    margin-top:10px;
+    margin-top:12px;
     display:flex;
     justify-content:center;
     gap:4px;
@@ -130,22 +135,30 @@ audio{
 }
 
 /* ===== LYRICS ===== */
-
 .lyrics{
-    margin-top:20px;
-    max-height:250px;
-    overflow-y:auto;
-    padding:15px;
+    margin-top:22px;
+    max-height:0;
+    opacity:0;
+    overflow:hidden;
+
+    padding:0 15px;
     border-radius:15px;
     background:rgba(255,255,255,.05);
     text-align:left;
     line-height:1.6;
+
+    transition:.6s ease;
+}
+
+.lyrics.show{
+    max-height:500px;
+    opacity:1;
+    padding:15px;
 }
 
 /* ===== FULLSCREEN BTN ===== */
-
 .fullBtn{
-    margin-top:10px;
+    margin-top:12px;
     background:none;
     border:none;
     color:#ff3cac;
@@ -169,7 +182,6 @@ for(let i=0;i<120;i++){
 }
 </script>
 
-
 <div class="container">
 
 <h1>🎸 Vivi</h1>
@@ -184,26 +196,22 @@ for(let i=0;i<120;i++){
 </audio>
 
 <div class="bars">
-<div class="bar"></div>
-<div class="bar"></div>
-<div class="bar"></div>
-<div class="bar"></div>
-<div class="bar"></div>
+  <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
 </div>
-
+<!--
+<button class="descBtn">📜 Descriere</button>
+-->
 <button class="fullBtn">⛶ Fullscreen</button>
 
 </div>
 
-
 <div class="lyrics">
 <b>Vivi – Legenda Vie</b><br><br>
 În birourile din Brăila, printre dosare-n foc,<br>
-Imprimantele plâng...<br>
-Voichița – Vivi – salvarea celor fără noroc.<br><br>
+Imprimantele plâng – Voichița, salvarea celor fără noroc.<br><br>
 
 Directă ca un raport, fără introducere,<br>
-Spune adevărul tare fără traducere.<br><br>
+Spune adevărul tare — fără traducere.<br><br>
 
 Varză sau conopidă?<br>
 „În interes de serviciu!”<br>
@@ -212,12 +220,7 @@ Pachetul dispare — Vivi intră-n serviciu.<br><br>
 Vivi, Vivi, legenda vie,<br>
 Din Brăila până-n galaxie,<br>
 Telefonul mereu deschis,<br>
-Sufletul arzând aprins.<br><br>
-
-Organizează nunți ca general<br>
-Curierii o știu — pantof oficial,<br>
-Bunicuțele primele pe listă,<br>
-Fără Vivi speranța nu există.
+Suflet arzând aprins.<br>
 </div>
 
 </div>
@@ -226,6 +229,9 @@ Fără Vivi speranța nu există.
 
 const audio = document.querySelector("audio");
 const playBtn = document.querySelector(".playBtn");
+const descBtn = document.querySelector(".descBtn");
+const lyrics = document.querySelector(".lyrics");
+const player = document.querySelector(".player");
 
 // Fade-in volum
 audio.volume = 0;
@@ -238,18 +244,24 @@ function fadeIn(){
         }else{
             clearInterval(fade);
         }
-    },200);
+    },150);
 }
-
-// Buton play
-playBtn.onclick=()=>{
+<!--
+// ▶ PLAY
+playBtn.onclick = ()=>{
     audio.muted=false;
     audio.play();
     fadeIn();
     playBtn.style.display="none";
 }
 
-// Fullscreen
+// 📜 DESCRIERE TOGGLE
+descBtn.onclick = ()=>{
+    lyrics.classList.toggle("show");
+    player.classList.toggle("zoom");
+}
+
+// ⛶ FULLSCREEN
 document.querySelector(".fullBtn").onclick=()=>{
     document.body.requestFullscreen();
 }
