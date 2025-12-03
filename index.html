@@ -2,11 +2,11 @@
 <html lang="ro">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vivi – Legenda Vie</title>
 
 <style>
-
-/* ===== BACKGROUND ANIMAT ===== */
+/* ===== RESET ===== */
 body{
     margin:0;
     background:linear-gradient(270deg,#050505,#250025,#050505);
@@ -14,14 +14,10 @@ body{
     animation:bgMove 15s ease infinite;
     color:white;
     font-family:Arial, sans-serif;
-
-    display:flex;
-    justify-content:center;
-    align-items:top;
-    min-height:100vh;
-    overflow:hidden;
+    overflow-x:hidden;
 }
 
+/* ===== BACKGROUND ===== */
 @keyframes bgMove{
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
@@ -37,7 +33,6 @@ body{
     opacity:.7;
     animation:star 8s linear infinite;
 }
-
 @keyframes star{
     from{transform:translateY(100vh);}
     to{transform:translateY(-10vh);}
@@ -45,132 +40,127 @@ body{
 
 /* ===== CONTAINER ===== */
 .container{
-    width:100%;
-    max-width:600px;
+    width:100vw;
+    min-height:100vh;
+    padding:20px;
+    padding-top:6vh;
     text-align:center;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    gap:14px;
+
+    position:relative;
     z-index:2;
 }
 
 /* ===== TITLURI ===== */
 h1{
     color:#ff3cac;
-    font-size:50px;
-    margin:50px 0;
+    font-size:clamp(38px,7vw,60px);
+    margin:0;
 }
 h2{
     color:#ffd4ff;
-    margin-top:0;
+    margin:0;
+    font-size:clamp(16px,4vw,26px);
 }
 
 /* ===== PLAYER ===== */
 .player{
-    margin-top:20px;
-    padding:25px;
+    width:80%;
+    padding:18px;
     border-radius:20px;
     background:rgba(255,255,255,.05);
-    box-shadow:0 0 25px rgba(255,60,172,0.6);
-    animation:glow 3s ease-in-out infinite alternate;
-
-    transition:.5s ease;
+    box-shadow:0 0 18px rgba(255,60,172,.6);
+    transition:.08s ease;
 }
 
-.player.zoom{
-    transform:scale(1.12);
+/* ===== GLOW PE BEAT ===== */
+.player.beat{
+    box-shadow:0 0 45px rgba(255,60,172,1);
+    transform:scale(1.01);
 }
 
-@keyframes glow{
-    from{box-shadow:0 0 12px rgba(255,60,172,.3);}
-    to{box-shadow:0 0 45px rgba(255,60,172,.9);}
-}
-
+/* ===== AUDIO ===== */
 audio{
     width:100%;
+    margin-top:10px;
+    height:48px;
 }
 
-/* ===== BUTOANE ===== */
-.playBtn,
-.descBtn{
-    margin:12px auto 0;
-    padding:12px 30px;
+/* ===== BUTON PLAY / PAUSE ===== */
+.playBtn{
+    width:100%;
+    padding:14px;
+    border-radius:40px;
     border:none;
-    border-radius:30px;
     background:#ff3cac;
-    color:black;
-    font-size:17px;
     font-weight:bold;
+    font-size:clamp(16px,4vw,22px);
     cursor:pointer;
-    box-shadow:0 0 12px #ff3cac;
-    transition:.3s;
-}
-
-.playBtn:hover,
-.descBtn:hover{
-    background:white;
 }
 
 /* ===== EQUALIZER ===== */
 .bars{
-    margin-top:12px;
     display:flex;
-    justify-content:center;
-    gap:4px;
-    height:40px;
+    justify-content:space-between;
+    align-items:flex-end;
+    height:50px;
+    width:100%;
+    margin:14px 0 8px;
 }
-
 .bar{
-    width:35px;
+    width:6%;
     background:#ff3cac;
+    border-radius:5px;
     height:10px;
-    animation:equal .5s infinite alternate;
+    transition:height .05s ease;
 }
 
-.bar:nth-child(2){animation-delay:.1s;}
-.bar:nth-child(3){animation-delay:.2s;}
-.bar:nth-child(4){animation-delay:.3s;}
-.bar:nth-child(5){animation-delay:.4s;}
-
-@keyframes equal{
-    from{height:10px;}
-    to{height:40px;}
-}
-
-/* ===== LYRICS ===== */
-.lyrics{
-    margin-top:22px;
-    max-height:0;
-    opacity:0;
-    overflow:hidden;
-
-    padding:0 15px;
-    border-radius:15px;
-    background:rgba(255,255,255,.05);
-    text-align:left;
-    line-height:1.6;
-
-    transition:.6s ease;
-}
-
-.lyrics.show{
-    max-height:500px;
-    opacity:1;
-    padding:15px;
-}
-
-/* ===== FULLSCREEN BTN ===== */
+/* ===== FULLSCREEN ===== */
 .fullBtn{
-    margin-top:12px;
     background:none;
     border:none;
     color:#ff3cac;
     font-size:16px;
-    cursor:pointer;
+    margin-top:6px;
 }
 
+/* ===== ROTATE-LOCK OVERLAY ===== */
+.rotateLock{
+    position:fixed;
+    inset:0;
+    background:black;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    z-index:9999;
+    font-size:22px;
+    padding:20px;
+    display:none;
+}
+.rotateLock.show{
+    display:flex;
+}
+
+/* ===== MOBILE STRICT ===== */
+@media (max-width:600px){
+    .bars{ height:42px; }
+}
 </style>
 </head>
+
 <body>
 
-<!-- PARTICULE -->
+<div class="rotateLock" id="rotateLock">
+📱 Rotește telefonul în poziție verticală
+</div>
+
 <script>
 for(let i=0;i<120;i++){
     let p=document.createElement("div");
@@ -187,85 +177,108 @@ for(let i=0;i<120;i++){
 <h1>🎸 Vivi</h1>
 <h2>Legenda Vie a Asistenței Sociale din Brăila</h2>
 
-<div class="player">
+<div class="player" id="player">
 
-<button class="playBtn">▶ PLAY LEGENDA</button>
+<button class="playBtn">▶ PLAY</button>
 
-<audio autoplay muted>
+<div class="bars" id="bars"></div>
+
+<audio id="audio">
     <source src="vivi-legenda-vie.mp3" type="audio/mpeg">
 </audio>
 
-<div class="bars">
-  <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-</div>
-<!--
-<button class="descBtn">📜 Descriere</button>
--->
 <button class="fullBtn">⛶ Fullscreen</button>
 
-</div>
-
-<div class="lyrics">
-<b>Vivi – Legenda Vie</b><br><br>
-În birourile din Brăila, printre dosare-n foc,<br>
-Imprimantele plâng – Voichița, salvarea celor fără noroc.<br><br>
-
-Directă ca un raport, fără introducere,<br>
-Spune adevărul tare — fără traducere.<br><br>
-
-Varză sau conopidă?<br>
-„În interes de serviciu!”<br>
-Pachetul dispare — Vivi intră-n serviciu.<br><br>
-
-Vivi, Vivi, legenda vie,<br>
-Din Brăila până-n galaxie,<br>
-Telefonul mereu deschis,<br>
-Suflet arzând aprins.<br>
 </div>
 
 </div>
 
 <script>
-
-const audio = document.querySelector("audio");
+const audio = document.getElementById("audio");
 const playBtn = document.querySelector(".playBtn");
-const descBtn = document.querySelector(".descBtn");
-const lyrics = document.querySelector(".lyrics");
-const player = document.querySelector(".player");
+const barsContainer = document.getElementById("bars");
+const fullBtn = document.querySelector(".fullBtn");
+const player = document.getElementById("player");
+const rotateLock = document.getElementById("rotateLock");
 
-// Fade-in volum
-audio.volume = 0;
-let fade;
-
-function fadeIn(){
-    fade = setInterval(()=>{
-        if(audio.volume < 1){
-            audio.volume += 0.05;
-        }else{
-            clearInterval(fade);
-        }
-    },150);
+// CREATE BARS
+const BARS = 16;
+for(let i=0;i<BARS;i++){
+    let b=document.createElement("div");
+    b.className="bar";
+    barsContainer.appendChild(b);
 }
-<!--
-// ▶ PLAY
+const bars=[...document.querySelectorAll(".bar")];
+
+// WEB AUDIO
+let ctx, src, analyser, data;
+
+function setupAudio(){
+    ctx = new (window.AudioContext||window.webkitAudioContext)();
+    src = ctx.createMediaElementSource(audio);
+    analyser = ctx.createAnalyser();
+    analyser.fftSize = 64;
+
+    src.connect(analyser);
+    analyser.connect(ctx.destination);
+
+    data = new Uint8Array(analyser.frequencyBinCount);
+}
+
+function animate(){
+    analyser.getByteFrequencyData(data);
+
+    // Equalizer
+    bars.forEach((bar,i)=>{
+        bar.style.height = Math.max(data[i]/3,8)+"px";
+    });
+
+    // === BEAT DETECTION (bass power) ===
+    let bass = 0;
+    for(let i=0;i<4;i++){
+        bass += data[i];
+    }
+
+    if(bass > 380){
+        player.classList.add("beat");
+    }else{
+        player.classList.remove("beat");
+    }
+
+    requestAnimationFrame(animate);
+}
+
+// PLAY / PAUSE TOGGLE
 playBtn.onclick = ()=>{
-    audio.muted=false;
-    audio.play();
-    fadeIn();
-    playBtn.style.display="none";
-}
+    if(!ctx){
+        setupAudio();
+        animate();
+    }
 
-// 📜 DESCRIERE TOGGLE
-descBtn.onclick = ()=>{
-    lyrics.classList.toggle("show");
-    player.classList.toggle("zoom");
-}
+    if(audio.paused){
+        audio.play();
+        playBtn.textContent="⏸ PAUSE";
+    }else{
+        audio.pause();
+        playBtn.textContent="▶ PLAY";
+    }
+};
 
-// ⛶ FULLSCREEN
-document.querySelector(".fullBtn").onclick=()=>{
+// FULLSCREEN
+fullBtn.onclick=()=>{
     document.body.requestFullscreen();
-}
+};
 
+// ROTATE LOCK
+function checkOrientation(){
+    if(window.innerWidth > window.innerHeight){
+        rotateLock.classList.add("show");
+    }else{
+        rotateLock.classList.remove("show");
+    }
+}
+window.addEventListener("resize",checkOrientation);
+checkOrientation();
 </script>
 
 </body>
