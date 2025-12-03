@@ -2,220 +2,219 @@
 <html lang="ro">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vivi – Legenda Vie</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>🔥 ROCK PLAYER</title>
 
 <style>
-/* ===== RESET ===== */
+
+/* ============== RESET ============== */
+*{box-sizing:border-box;}
 body{
     margin:0;
-    background:linear-gradient(270deg,#050505,#250025,#050505);
-    background-size:600% 600%;
-    animation:bgMove 15s ease infinite;
-    color:white;
-    font-family:Arial, sans-serif;
+    background:
+    radial-gradient(circle at top,#1a0000 0%,#050000 40%,#000 100%);
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
     overflow-x:hidden;
 }
 
-/* ===== BACKGROUND ===== */
-@keyframes bgMove{
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-
-/* ===== PARTICULE ===== */
-.particle{
+/* ============== SMOKE PARTICLES ============== */
+.ember{
     position:absolute;
-    width:2px;
-    height:2px;
-    background:white;
+    bottom:-10px;
+    width:3px;
+    height:3px;
+    background:red;
+    border-radius:50%;
     opacity:.7;
-    animation:star 8s linear infinite;
-}
-@keyframes star{
-    from{transform:translateY(100vh);}
-    to{transform:translateY(-10vh);}
+    animation:rise 6s linear infinite;
 }
 
-/* ===== CONTAINER ===== */
-.container{
-    width:100vw;
+@keyframes rise{
+    from{transform:translateY(0) scale(1);opacity:.8;}
+    to{transform:translateY(-110vh) scale(2);opacity:0;}
+}
+
+/* ============== MAIN LAYOUT ============== */
+.wrapper{
+    width:100%;
+    max-width:460px;
+    margin:auto;
+    padding:12px;
     min-height:100vh;
-    padding:20px;
-    padding-top:6vh;
-    text-align:center;
 
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:flex-start;
-    gap:14px;
-
-    position:relative;
-    z-index:2;
 }
 
-/* ===== TITLURI ===== */
-h1{
-    color:#ff3cac;
-    font-size:clamp(38px,7vw,60px);
-    margin:0;
-}
-h2{
-    color:#ffd4ff;
-    margin:0;
-    font-size:clamp(16px,4vw,26px);
+/* ============== TITLU ============== */
+.logo{
+    font-size:42px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:#ff1616;
+    text-shadow:0 0 25px crimson;
+    margin:18px 0 2px;
 }
 
-/* ===== PLAYER ===== */
+.subtitle{
+    font-size:16px;
+    text-transform:uppercase;
+    opacity:.75;
+}
+
+/* ============== PLAYER ============== */
 .player{
-    width:80%;
-    padding:18px;
-    border-radius:20px;
-    background:rgba(255,255,255,.05);
-    box-shadow:0 0 18px rgba(255,60,172,.6);
+    width:100%;
+    margin-top:30px;
+    padding:16px;
+    border-radius:12px;
+
+    background:linear-gradient(145deg,#130000,#000);
+    border:2px solid #ff1616;
+    box-shadow:0 0 15px #ff1616;
+
     transition:.08s ease;
 }
 
-/* ===== GLOW PE BEAT ===== */
 .player.beat{
-    box-shadow:0 0 45px rgba(255,60,172,1);
-    transform:scale(1.01);
+    box-shadow:
+        0 0 25px crimson,
+        0 0 45px red;
+    transform:scale(1.02);
 }
 
-/* ===== AUDIO ===== */
-audio{
-    width:100%;
-    margin-top:10px;
-    height:20px;
-}
-
-/* ===== BUTON PLAY / PAUSE ===== */
+/* ============== PLAY BTN ============== */
 .playBtn{
     width:100%;
-    padding:20px;
-    border-radius:40px;
+    background:#ff1616;
     border:none;
-    background:#ff3cac;
-    font-weight:bold;
-    font-size:clamp(16px,4vw,22px);
+    border-radius:50px;
+    padding:14px;
+    color:#000;
+    font-weight:900;
+    font-size:22px;
+    letter-spacing:2px;
     cursor:pointer;
 }
 
-/* ===== EQUALIZER ===== */
-.bars{
+/* ============== EQUALIZER ============== */
+.eq{
+    width:100%;
+    height:52px;
+    margin:16px 0 10px;
     display:flex;
     justify-content:space-between;
     align-items:flex-end;
-    height:50px;
-    width:100%;
-    margin:70px 0 8px;
 }
 .bar{
-    width:6%;
-    background:#ff3cac;
-    border-radius:5px;
+    width:5%;
     height:10px;
-    transition:height .05s ease;
+    background:linear-gradient(to top,#700000,#ff1616);
+    border-radius:3px;
+    transition:height 0.05s linear;
 }
 
-/* ===== FULLSCREEN ===== */
+/* ============== AUDIO ============== */
+audio{
+    width:100%;
+    height:44px;
+}
+
+/* ============== FULLSCREEN BTN ============== */
 .fullBtn{
+    width:100%;
     background:none;
     border:none;
-    color:#ff3cac;
+    color:#ff1616;
     font-size:16px;
-    margin-top:6px;
+    margin-top:8px;
 }
 
-/* ===== ROTATE-LOCK OVERLAY ===== */
+/* ============== ROTATE LOCK ============== */
 .rotateLock{
     position:fixed;
     inset:0;
-    background:black;
-    color:white;
-    display:flex;
-    justify-content:center;
+    background:#000;
+    color:#fff;
+    display:none;
     align-items:center;
+    justify-content:center;
     text-align:center;
     z-index:9999;
     font-size:22px;
-    padding:20px;
-    display:none;
 }
-.rotateLock.show{
-    display:flex;
-}
+.rotateLock.show{display:flex;}
 
-/* ===== MOBILE STRICT ===== */
-@media (max-width:600px){
-    .bars{ height:42px; }
-}
 </style>
 </head>
-
 <body>
 
-<div class="rotateLock" id="rotateLock">
-📱 Rotește telefonul în poziție verticală
+<!-- ROTATE LOCK -->
+<div id="rotateLock" class="rotateLock">
+📵 Ține telefonul vertical  
+ROCK MODE
 </div>
 
+<!-- EMBERS -->
 <script>
-for(let i=0;i<120;i++){
-    let p=document.createElement("div");
-    p.className="particle";
-    p.style.left=Math.random()*100+"vw";
-    p.style.animationDelay=Math.random()*8+"s";
-    p.style.opacity=Math.random();
-    document.body.appendChild(p);
+for(let i=0;i<100;i++){
+    let e=document.createElement("div");
+    e.className="ember";
+    e.style.left=Math.random()*100+"vw";
+    e.style.animationDelay=Math.random()*6+"s";
+    e.style.opacity=Math.random();
+    document.body.appendChild(e);
 }
 </script>
 
-<div class="container">
+<div class="wrapper">
 
-<h1>🎸 Vivi</h1>
-<h2>Legenda Vie a Asistenței Sociale din Brăila</h2>
+<div class="logo">🔥  Vivi</div>
+<div class="subtitle">Legenda Vie a Asistenței Sociale din Brăila</div>
 
 <div class="player" id="player">
 
 <button class="playBtn">▶ PLAY</button>
 
-<div class="bars" id="bars"></div>
+<div class="eq" id="eq"></div>
 
-<audio id="audio">
+<audio id="audio" preload="auto">
     <source src="vivi-legenda-vie.mp3" type="audio/mpeg">
 </audio>
 
-<button class="fullBtn">⛶ Fullscreen</button>
+<button class="fullBtn">⛶ FULLSCREEN</button>
 
 </div>
 
 </div>
 
 <script>
+
 const audio = document.getElementById("audio");
 const playBtn = document.querySelector(".playBtn");
-const barsContainer = document.getElementById("bars");
-const fullBtn = document.querySelector(".fullBtn");
+const eqBox   = document.getElementById("eq");
 const player = document.getElementById("player");
-const rotateLock = document.getElementById("rotateLock");
+const rotate = document.getElementById("rotateLock");
 
-// CREATE BARS
-const BARS = 16;
-for(let i=0;i<BARS;i++){
+/* ============== CREATE BARS ============== */
+const BAR_COUNT = 16;
+for(let i=0;i<BAR_COUNT;i++){
     let b=document.createElement("div");
     b.className="bar";
-    barsContainer.appendChild(b);
+    eqBox.appendChild(b);
 }
-const bars=[...document.querySelectorAll(".bar")];
+const bars = document.querySelectorAll(".bar");
 
-// WEB AUDIO
-let ctx, src, analyser, data;
+/* ============== WEB AUDIO ============== */
+let ctx,src,analyser,data;
 
-function setupAudio(){
+function setup(){
     ctx = new (window.AudioContext||window.webkitAudioContext)();
     src = ctx.createMediaElementSource(audio);
+
     analyser = ctx.createAnalyser();
     analyser.fftSize = 64;
 
@@ -228,57 +227,54 @@ function setupAudio(){
 function animate(){
     analyser.getByteFrequencyData(data);
 
-    // Equalizer
     bars.forEach((bar,i)=>{
-        bar.style.height = Math.max(data[i]/3,8)+"px";
+        bar.style.height = Math.max(data[i]/2.5,8)+"px";
     });
 
-    // === BEAT DETECTION (bass power) ===
-    let bass = 0;
-    for(let i=0;i<4;i++){
-        bass += data[i];
-    }
+    // Beat glow = bass explosion
+    let power=0;
+    for(let i=0;i<4;i++) power+=data[i];
 
-    if(bass > 380){
-        player.classList.add("beat");
-    }else{
-        player.classList.remove("beat");
-    }
+    if(power>360) player.classList.add("beat");
+    else player.classList.remove("beat");
 
     requestAnimationFrame(animate);
 }
 
-// PLAY / PAUSE TOGGLE
-playBtn.onclick = ()=>{
+/* ============== PLAY PAUSE ============== */
+playBtn.onclick=()=>{
+
     if(!ctx){
-        setupAudio();
+        setup();
         animate();
     }
 
     if(audio.paused){
         audio.play();
         playBtn.textContent="⏸ PAUSE";
-    }else{
+    }
+    else{
         audio.pause();
         playBtn.textContent="▶ PLAY";
     }
-};
-
-// FULLSCREEN
-fullBtn.onclick=()=>{
-    document.body.requestFullscreen();
-};
-
-// ROTATE LOCK
-function checkOrientation(){
-    if(window.innerWidth > window.innerHeight){
-        rotateLock.classList.add("show");
-    }else{
-        rotateLock.classList.remove("show");
-    }
 }
-window.addEventListener("resize",checkOrientation);
+
+/* ============== FULLSCREEN ============== */
+document.querySelector(".fullBtn").onclick=()=>{
+    document.body.requestFullscreen();
+}
+
+/* ============== ORIENTATION LOCK ============== */
+function checkOrientation(){
+    if(innerWidth>innerHeight)
+        rotate.classList.add("show");
+    else
+        rotate.classList.remove("show");
+}
+
+addEventListener("resize",checkOrientation);
 checkOrientation();
+
 </script>
 
 </body>
