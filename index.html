@@ -2,7 +2,7 @@
 <html lang="ro">
 <head>
 <meta charset="UTF-8">
-<title>Vivi – Legenda Vie din Brăila</title>
+<title>Vivi – Legenda Vie</title>
 
 <style>
 
@@ -14,6 +14,12 @@ body{
     animation:bgMove 15s ease infinite;
     color:white;
     font-family:Arial, sans-serif;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow:hidden;
 }
 
 @keyframes bgMove{
@@ -22,44 +28,45 @@ body{
     100%{background-position:0% 50%}
 }
 
-/* ===== LAYOUT ===== */
+/* ===== PARTICULE ===== */
+.particle{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    opacity:.7;
+    animation:star 8s linear infinite;
+}
+
+@keyframes star{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
+}
+
+/* ===== CONTAINER ===== */
 .container{
-    max-width:900px;
-    margin:auto;
-    padding:35px 20px;
+    width:90%;
+    max-width:500px;
     text-align:center;
+    z-index:2;
 }
 
-/* ===== COPERTA ===== */
-.cover img{
-    width:100%;
-    max-width:400px;
-    border-radius:20px;
-    box-shadow:0 0 30px rgba(255,0,180,0.5);
-    transition:transform .3s ease;
-}
-
-.cover img:hover{
-    transform:scale(1.03);
-}
-
+/* ===== TITLURI ===== */
 h1{
-    margin-top:250px;
     color:#ff3cac;
     font-size:42px;
+    margin:10px 0;
 }
-
 h2{
-    margin-top:5px;
-    font-weight:normal;
     color:#ffd4ff;
+    margin-top:0;
 }
 
 /* ===== PLAYER ===== */
+
 .player{
-    margin:30px auto;
-    padding:40px;
-    max-width:420px;
+    margin-top:20px;
+    padding:25px;
     border-radius:20px;
     background:rgba(255,255,255,.05);
     box-shadow:0 0 25px rgba(255,60,172,0.6);
@@ -75,106 +82,179 @@ audio{
     width:100%;
 }
 
+/* ===== BUTON PLAY ===== */
+
+.playBtn{
+    margin:15px auto;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    background:#ff3cac;
+    color:black;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 0 12px #ff3cac;
+    transition:.3s;
+}
+
+.playBtn:hover{
+    background:white;
+}
+
+/* ===== EQUALIZER ===== */
+
+.bars{
+    margin-top:10px;
+    display:flex;
+    justify-content:center;
+    gap:4px;
+    height:40px;
+}
+
+.bar{
+    width:6px;
+    background:#ff3cac;
+    height:10px;
+    animation:equal .5s infinite alternate;
+}
+
+.bar:nth-child(2){animation-delay:.1s;}
+.bar:nth-child(3){animation-delay:.2s;}
+.bar:nth-child(4){animation-delay:.3s;}
+.bar:nth-child(5){animation-delay:.4s;}
+
+@keyframes equal{
+    from{height:10px;}
+    to{height:40px;}
+}
+
 /* ===== LYRICS ===== */
 
-.lyricsBox{
-    background:rgba(255,255,255,0.06);
-    border-radius:20px;
-    padding:20px;
-    box-shadow:0 0 15px rgba(255,60,172,.2);
+.lyrics{
+    margin-top:20px;
+    max-height:250px;
+    overflow-y:auto;
+    padding:15px;
+    border-radius:15px;
+    background:rgba(255,255,255,.05);
     text-align:left;
     line-height:1.6;
-    max-height:350px;
-    overflow-y:auto;
-    white-space:pre-line;
 }
 
-/* scrollbar custom */
-.lyricsBox::-webkit-scrollbar{
-    width:8px;
-}
-.lyricsBox::-webkit-scrollbar-thumb{
-    background:#ff3cac;
-    border-radius:10px;
-}
+/* ===== FULLSCREEN BTN ===== */
 
-.footer{
-    margin-top:40px;
-    opacity:0.6;
-    text-align:center;
+.fullBtn{
+    margin-top:10px;
+    background:none;
+    border:none;
+    color:#ff3cac;
+    font-size:16px;
+    cursor:pointer;
 }
 
 </style>
 </head>
-
 <body>
 
-<div class="container">
+<!-- PARTICULE -->
+<script>
+for(let i=0;i<120;i++){
+    let p=document.createElement("div");
+    p.className="particle";
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDelay=Math.random()*8+"s";
+    p.style.opacity=Math.random();
+    document.body.appendChild(p);
+}
+</script>
 
-<!-- ===== COPERTA ===== 
-<div class="cover">
-    <img src="coperta-vivi.png" alt="Vivi – Legenda Vie">
-</div> -->
+
+<div class="container">
 
 <h1>🎸 Vivi</h1>
 <h2>Legenda Vie a Asistenței Sociale din Brăila</h2>
 
-<!-- ===== PLAYER ===== -->
 <div class="player">
-    <audio controls>
-        <source src="vivi-legenda-vie.mp3" type="audio/mpeg">
-        Browserul tău nu suportă audio.
-    </audio>
+
+<button class="playBtn">▶ PLAY LEGENDA</button>
+
+<audio autoplay muted>
+    <source src="vivi-legenda-vie.mp3" type="audio/mpeg">
+</audio>
+
+<div class="bars">
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
 </div>
 
-<!-- ===== LYRICS ===== 
-<div class="lyricsBox">
-
-<b>Vivi – Legenda Vie</b>
-
-În birourile din Brăila, printre dosare-n foc,
-Unde imprimantele plâng, ca trenurile fără loc,
-Apare-o siluetă, fix când ai nevoie,
-Voichița – Vivi – salvare pentru noi toți la datorie.
-
-Directă ca un raport, fără nicio introducere,
-Spune adevărul tare, n-are timp de traducere,
-Călătorește prin vise, prin hărți și prin hotare,
-Dar gustă lumea-n pași mici, cu Florin la testare.
-
-„Varză sau conopidă?
-— În interes de serviciu!”
-Pachetul dispare,
-De Vivi n-ai scăpare.
-
-Vivi, Vivi, legenda vie,
-Din Brăila până-n galaxie,
-Cu telefonul mereu deschis,
-Și sufletul la maxim aprins.
-
-Sună fiica de douăzeci de ori pe zi,
-„Nu pot vorbi, sunt ocupată” – mereu va auzi,
-Surpriza rămâne constantă,
-Dar perseverența – diamantă.
-
-Organizează nunta ca generalul în război,
-Curierii o știu după pantofii noi,
-Cu Cornel se ceartă-n ring modern,
-Dar fără ei doi, biroul ar fi tern.
-
-Strictă uneori, dar cu suflet imens,
-Bunicuțele sunt mereu pe sens,
-În jungla birocratică grea,
-Vivi rămâne speranța, inima cea rea… de bună.
-  
-</div> -->
-
-<div class="footer">
-💜 Creat pentru Vivi - Brăila • 2025<br>
+<button class="fullBtn">⛶ Fullscreen</button>
 
 </div>
 
+
+<div class="lyrics">
+<b>Vivi – Legenda Vie</b><br><br>
+În birourile din Brăila, printre dosare-n foc,<br>
+Imprimantele plâng...<br>
+Voichița – Vivi – salvarea celor fără noroc.<br><br>
+
+Directă ca un raport, fără introducere,<br>
+Spune adevărul tare fără traducere.<br><br>
+
+Varză sau conopidă?<br>
+„În interes de serviciu!”<br>
+Pachetul dispare — Vivi intră-n serviciu.<br><br>
+
+Vivi, Vivi, legenda vie,<br>
+Din Brăila până-n galaxie,<br>
+Telefonul mereu deschis,<br>
+Sufletul arzând aprins.<br><br>
+
+Organizează nunți ca general<br>
+Curierii o știu — pantof oficial,<br>
+Bunicuțele primele pe listă,<br>
+Fără Vivi speranța nu există.
 </div>
+
+</div>
+
+<script>
+
+const audio = document.querySelector("audio");
+const playBtn = document.querySelector(".playBtn");
+
+// Fade-in volum
+audio.volume = 0;
+let fade;
+
+function fadeIn(){
+    fade = setInterval(()=>{
+        if(audio.volume < 1){
+            audio.volume += 0.05;
+        }else{
+            clearInterval(fade);
+        }
+    },200);
+}
+
+// Buton play
+playBtn.onclick=()=>{
+    audio.muted=false;
+    audio.play();
+    fadeIn();
+    playBtn.style.display="none";
+}
+
+// Fullscreen
+document.querySelector(".fullBtn").onclick=()=>{
+    document.body.requestFullscreen();
+}
+
+</script>
 
 </body>
 </html>
