@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Daniel Tîncabă</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background-color: #252525;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      /* Increased top padding so the card is slightly lower from the top */
+      padding: 40px 20px 20px;
+    }
+
+    .card {
+      background: #282828;
+      border-radius: 18px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      max-width: 600px;
+      width: 100%;
+      text-align: left;
+    }
+
+    .photo {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .info {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .info-text {
+      flex: 1;
+    }
+
+    .title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .rank {
+      font-size: 1rem;
+      color: #9a9a9a;
+      margin-bottom: 0px;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 6px;
+      filter: invert(1) grayscale(0);
+    }
+
+    .whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      margin-top: 0px;
+      background-color: #009895;
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 50px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+      transition: background 0.2s, transform 0.2s;
+      width: fit-content;
+    }
+
+    .whatsapp:hover {
+      background-color: #00a09d;
+      transform: scale(1.05);
+    }
+
+    .whatsapp .icon {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .whatsapp .text {
+      font-size: 0.95rem;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.8rem;
+      color: #9a9a9a;
+    }
+    .photo-card { margin-bottom: 25px; }
+  </style>
+</head>
+<body>
+  <div class="card photo-card">
+    <!-- FOTOGRAFIA MILITARĂ -->
+    <img class="photo" src="https://domitiantincaba.github.io/daniel_tincaba/daniel_tincaba.jpeg" alt="Daniel Tîncabă">
+
+    <!-- INFORMAȚII -->
+      </div>
+
+  <div class="card info-card">
+    <div class="info">
+      <div class="header">
+        <div class="info-text">
+          <div class="title">Daniel Tîncabă</div>
+          <div class="rank">Grupul 5 EOD</div>
+        </div>
+        <!-- BUTON WHATSAPP -->
+        <a class="whatsapp" href="https://wa.me/40768003671" target="_blank">
+          <span class="icon">💬</span>
+          <span class="text"></span>
+        </a>
+      </div>
+
+      <!-- PLAYER AUDIO -->
+      <audio controls autoplay>
+        <source src="https://domitiantincaba.github.io/daniel_tincaba/daniel_tincaba.mp3" type="audio/mp3">
+        Browserul tău nu suportă redarea audio.
+      </audio> 
+    </div>
+  </div>
+
+  <footer>© 2025 Made with &#129654; by Domitian Tincaba</footer> 
+</body>
+</html>
